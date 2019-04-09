@@ -1,3 +1,4 @@
+//array of search querys
 var topics = ["one", "two", "three"];
 
 //print topics array as buttons
@@ -8,6 +9,7 @@ function printButtons() {
     for (i = 0; i < topics.length; i++) {
         var button = $("<button>");
         button.text(topics[i]);
+        button.addClass("topics");
         button.attr("topic-name", topics[i]);
         $("#buttons").append(button);
     }
@@ -16,19 +18,33 @@ function printButtons() {
 //function for grabbing gifs from API
 function gifAppear() {
 
-    var gif = $(this).attr("topic-name")
-    var queryURL = "api.giphy.com/v1/gifs/search?api_key=yok1vkn3R9JFKHVSbKVuGMf91YlDubwN&q=" + gif + "&limit=10&offset=0&rating=PG-13&lang=en";
+    var gif = $(this).attr("topic-name");
+    console.log(gif);
+    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=yok1vkn3R9JFKHVSbKVuGMf91YlDubwN&q=" + gif + "&limit=10&offset=0&rating=PG-13&lang=en";
 
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function(response) {
         $("#gifDisplay").empty();
+        console.log(response)
         
         for (i = 0; i < response.data.length; i++) {
-        $("#gifDisplay").html("<div>Rating:" + response.data.rating + "</div><div><img href=" + response.data.images.fixed_height_still + "></div>");
+            console.log(response.data[i].images.fixed_height_still.url);
+        $("#gifDisplay").append("<div>Rating: " + response.data[i].rating + "</div><div><img class='gifs' state='still' stillLink='" + response.data[i].images.fixed_height_still.url +"' animatedLink='" + response.data[i].images.fixed_height_downsampled.url + "' src=" + response.data[i].images.fixed_height_still.url + "></div>");
         }
     })
+}
+
+function animate() {
+    if ($(this).attr("state") === "still") {
+        $(this).attr("src", $(this).attr("animatedLink"));
+        $(this).attr("state", "animated");
+      }
+    else {
+        $(this).attr("src", $(this).attr("stillLink"));
+        $(this).attr("state", "still");
+    }
 }
 
 $(document).ready(function() {
@@ -43,12 +59,9 @@ $("#add-topic").on("click", function(event) {
     printButtons();
 })
 
-$(".gifs").on("click", function() {
-    event.preventDefault();
+$(document).on("click", ".topics", gifAppear);
 
-    //if moving set to still and vice versa, use JSON pathing
-})
-
+$(document).on("click", ".gifs", animate)
 
 printButtons();
 
