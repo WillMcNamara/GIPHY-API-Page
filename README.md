@@ -11,3 +11,6 @@ but changing the click functions syntax, they would work for all buttons created
 
 Otherwise coding felt fairly simple, it was mostly just applying what we learned in a
 few activities to a complete project.
+
+I added this to my portfolio by linking it through the first image, but holy God that thing is a
+complete mess held together with duct tape that I dont want to deal with.
