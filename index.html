@@ -3,30 +3,36 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <title>Awesome Title Here</title>
+        <title>Tasty Gifs</title>
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type='text/javascript' src=assets/javascript.js></script>
         
         <link rel="stylesheet" type="text/css" href=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css>
-        <link type='text/css' src=assets/style.css>
+        <link rel="stylesheet" type='text/css' src=assets/style.css>
     </head>
 
-    <body>
+    <body class="bg-dark">
+        
+        <div class="container bg-light my-2">
+            
+            <div class="row border-bottom border-dark">
 
-        <div id="buttons">
+                <div class="col-md-8 my-2" id="buttons"></div>
+                
+                <form class="col-md-4 my-2" id="topic-form">
+                    
+                    <div class="form-group">
+                        <label class="font-weight-bolder" for="newTopic">Add another Food:</label>
+                        <input class="form-control mb-2" type="text" id="newTopic">      
+                        <input class="btn btn-info" id="add-topic" type="submit" value="Add!">
+                    </div>
+                
+                </form>
 
-        </div>
+            </div>
 
-        <form id="topic-form">
-           
-            <label for="newTopic">Add a topic</label>
-            <input type="text" id="newTopic"><br>      
-            <input id="add-topic" type="submit" value="Add a Topic!">
-          
-        </form>
-
-        <div id="gifDisplay">
+            <div class="row" id="gifDisplay"></div>
 
         </div>
 
